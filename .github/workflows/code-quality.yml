@@ -1,0 +1,50 @@
+name: Code Quality
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - edited
+
+jobs:
+  code-quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - go
+          - python
+
+    steps:
+      - name: Install prlint
+        run: go install github.com/tmrts/prlint
+
+      - name: Run prlint
+        run: prlint -config .github/prlint.json ${{ github.event.pull_request.title }}
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/setup@v2
+        with:
+          languages: go
+
+      - name: Autobuild Project
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2

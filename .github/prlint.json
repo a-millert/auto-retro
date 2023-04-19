@@ -1,0 +1,10 @@
+{
+  "checks": {
+    "ar-issue-number": {
+      "title": {
+        "regex": "^AR-\\d+-.*$",
+        "error": "PR title should start with 'AR-<number>-<more>'"
+      }
+    }
+  }
+}
