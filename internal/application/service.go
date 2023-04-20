@@ -14,8 +14,9 @@ import (
 )
 
 type Service interface {
-	Login() *core.User
-	Teams() *core.User
+	login() (*core.User, error)
+	teams() ([]*core.Team, error)
+	Run() error
 }
 
 type Application struct {
@@ -25,11 +26,7 @@ type Application struct {
 	excludeTeams []string
 }
 
-func New(
-	githubToken string,
-	organization string,
-	excludeTeams string,
-) *Application {
+func New(githubToken string, organization string, excludeTeams string) Service {
 	ctx := context.Background()
 
 	// Set up the GitHub GraphQL API v4 client with the HTTP OAuth2 client.
