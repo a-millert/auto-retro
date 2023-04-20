@@ -65,7 +65,11 @@ coverage:
 
 .PHONY: reviewdog
 reviewdog:
-	reviewdog -conf=.reviewdog.yml $(REVIEWDOG_ARG)
+	reviewdog -conf=.reviewdog.yml -diff="git diff master"
+
+.PHONY: reviewdog-pr
+reviewdog-pr:
+	golangci-lint run --out-format checkstyle | reviewdog -f=checkstyle -reporter=github-pr-review
 
 .PHONY: changelog
 changelog:
