@@ -10,9 +10,9 @@ import (
 type Env struct {
 	GitHubToken string `envconfig:"GITHUB_TOKEN" default:""`
 
-	Organization string `envconfig:"ORGANIZATION" default:""`
+	Organization string `envconfig:"ORGANIZATION" default:"kouzoh"`
 
-	ExcludeTeams string `envconfig:"EXCLUDE_TEAMS" default:""`
+	ExcludeTeams string `envconfig:"EXCLUDE_TEAMS" default:"all-engineers"`
 }
 
 // validate is used to check the invariants of values defined by Env.
