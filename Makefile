@@ -63,10 +63,6 @@ lint-fix:
 coverage:
 	@go test -v -coverpkg=./... -coverprofile=cover.out -race ./...
 
-.PHONY: reviewdog
-reviewdog:
-	reviewdog -conf=.reviewdog.yml -diff="git diff master"
-
 .PHONY: reviewdog-pr
 reviewdog-pr:
 	golangci-lint run --out-format checkstyle | reviewdog -f=checkstyle -reporter=github-pr-review
