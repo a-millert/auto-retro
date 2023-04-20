@@ -5,7 +5,6 @@ go 1.19
 require (
 	github.com/golangci/golangci-lint v1.52.2
 	github.com/kelseyhightower/envconfig v1.4.0
-	github.com/quasilyte/go-consistent v0.0.0-20220429160651-4e46040fbc82
 	github.com/reviewdog/reviewdog v0.14.1
 	github.com/shurcooL/githubv4 v0.0.0-20230305132112-efb623903184
 	golang.org/x/oauth2 v0.7.0
@@ -57,9 +56,7 @@ require (
 	github.com/go-toolsmith/astcopy v1.1.0 // indirect
 	github.com/go-toolsmith/astequal v1.1.0 // indirect
 	github.com/go-toolsmith/astfmt v1.1.0 // indirect
-	github.com/go-toolsmith/astinfo v0.0.0-20180906194353-9809ff7efb21 // indirect
 	github.com/go-toolsmith/astp v1.1.0 // indirect
-	github.com/go-toolsmith/pkgload v1.2.2 // indirect
 	github.com/go-toolsmith/strparse v1.1.0 // indirect
 	github.com/go-toolsmith/typep v1.1.0 // indirect
 	github.com/go-xmlfmt/xmlfmt v1.1.2 // indirect
