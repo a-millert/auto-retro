@@ -22,7 +22,7 @@ SERVICE_NAME := $(shell grep "^module" go.mod | sed 's:.*/::')
 
 .PHONY: build
 build:
-	@CGO_ENABLED=0 go build -v \
+	@CGO_ENABLED=0 go build -o bin/server \
       -ldflags "-X main.version=$(VERSION) -X main.serviceName=$(SERVICE_NAME)" \
       ./cmd/http
 

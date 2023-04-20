@@ -9,6 +9,10 @@ import (
 // Env struct defines all required environment variables for the app to run.
 type Env struct {
 	GitHubToken string `envconfig:"GITHUB_TOKEN" default:""`
+
+	Organization string `envconfig:"ORGANIZATION" default:""`
+
+	ExcludeTeams string `envconfig:"EXCLUDE_TEAMS" default:""`
 }
 
 // validate is used to check the invariants of values defined by Env.
