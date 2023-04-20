@@ -5,10 +5,6 @@ import (
 	"os"
 )
 
-type failures interface {
-	Abort() error
-}
-
 type EnrichedError struct {
 	err error
 	msg string
