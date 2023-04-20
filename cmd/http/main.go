@@ -8,7 +8,7 @@ import (
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 
-	application "github.com/a-millert/auto-retro/internal/application/graphql"
+	service "github.com/a-millert/auto-retro/internal/application"
 	"github.com/a-millert/auto-retro/internal/pkg/fail"
 )
 
@@ -17,6 +17,12 @@ const (
 	// exit code is passed to os.Exit function.
 	exitOK = iota
 	exitError
+)
+
+const (
+	memberRole = githubv4.TeamRoleMember
+	topMembers = githubv4.Int(12)
+	pageSize   = githubv4.Int(100)
 )
 
 func main() {
@@ -44,13 +50,14 @@ func realMain() error {
 	httpClient := oauth2.NewClient(ctx, tokenSource)
 	ghClient := githubv4.NewClient(httpClient)
 
-	// Sanity-check: Authenticate the user.
-	var loginQuery application.LoginQuery
-	err = ghClient.Query(ctx, &loginQuery, nil)
-	if err != nil || len(loginQuery.Viewer.Login) == 0 {
-		return fail.New(err, "Failed to authenticate with the token").Abort()
+	application := service.New(&ctx, ghClient, env.Organization, env.ExcludeTeams)
+	login, err := application.Login()
+	teams, err := application.Teams()
+
+	fmt.Printf("logged as %s\n", login.Username)
+	for _, x := range teams {
+		fmt.Printf("Team %s with members: %+v\n", x.Name, x.Members)
 	}
-	fmt.Println("Successfully logged in as:", loginQuery.Viewer.Login)
 
 	// application builder with DI
 
