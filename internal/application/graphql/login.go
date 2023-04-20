@@ -1,6 +1,6 @@
 package application
 
-type LoginQuery struct {
+type LoginResponse struct {
 	Viewer struct {
 		Login string
 	}
